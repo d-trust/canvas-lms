@@ -363,6 +363,7 @@ GEM
     afm (0.2.2)
     after_transaction_commit (2.2.2)
       activerecord (>= 5.2)
+    android_key_attestation (0.3.0)
     apollo-federation (3.8.5)
       google-protobuf (~> 3.22)
       graphql (>= 1.10.14)
@@ -376,6 +377,7 @@ GEM
       activesupport (>= 5.2, < 7.2)
       request_store (~> 1.0)
     awesome_print (1.9.2)
+    awrence (1.2.1)
     aws-eventstream (1.3.0)
     aws-partitions (1.931.0)
     aws-sdk-applicationautoscaling (1.83.0)
@@ -455,6 +457,7 @@ GEM
       rack
     canvas_webex (0.18.2)
       railties
+    cbor (0.5.9.8)
     childprocess (5.0.0)
     chunky_png (1.4.0)
     cld (0.13.0)
@@ -471,6 +474,9 @@ GEM
     colorize (1.1.0)
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
+    cose (1.3.0)
+      cbor (~> 0.5.9)
+      openssl-signature_algorithm (~> 1.0)
     crack (1.0.0)
       bigdecimal
       rexml
@@ -791,6 +797,9 @@ GEM
       activerecord (>= 6.0, < 7.2)
       rspec (>= 3.6)
       rspec-rails (>= 4.0)
+    openssl (3.2.0)
+    openssl-signature_algorithm (1.3.0)
+      openssl (> 2.0)
     os (1.1.4)
     outrigger (3.0.2)
       activerecord (>= 6.0, < 7.2)
@@ -1034,6 +1043,8 @@ GEM
     rubycas-client (2.3.9)
       activesupport
     rubyzip (2.3.2)
+    safety_net_attestation (0.4.0)
+      jwt (~> 2.0)
     saml2 (3.1.7)
       activesupport (>= 3.2, < 7.2)
       nokogiri (>= 1.5.8, < 2.0)
@@ -1136,6 +1147,10 @@ GEM
     tins (1.33.0)
       bigdecimal
       sync
+    tpm-key_attestation (0.12.0)
+      bindata (~> 2.4)
+      openssl (> 2.0)
+      openssl-signature_algorithm (~> 1.0)
     trailblazer-option (0.1.2)
     ttfunk (1.8.0)
       bigdecimal (~> 3.1)
@@ -1168,6 +1183,15 @@ GEM
       coercible (~> 1.0)
       descendants_tracker (~> 0.0, >= 0.0.3)
     wcag_color_contrast (0.1.0)
+    webauthn (3.1.0)
+      android_key_attestation (~> 0.3.0)
+      awrence (~> 1.1)
+      bindata (~> 2.4)
+      cbor (~> 0.5.9)
+      cose (~> 1.1)
+      openssl (>= 2.2)
+      safety_net_attestation (~> 0.4.0)
+      tpm-key_attestation (~> 0.12.0)
     webmock (3.23.0)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
@@ -1393,6 +1417,7 @@ DEPENDENCIES
   vault (~> 0.17)
   vericite_api (= 1.5.3)
   wcag_color_contrast (= 0.1.0)
+  webauthn (~> 3.1)
   webmock (~> 3.18)
   workflow!
   yard (~> 0.9)
