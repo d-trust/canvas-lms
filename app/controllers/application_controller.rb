@@ -97,6 +97,13 @@ class ApplicationController < ActionController::Base
   after_action :set_response_headers
   after_action :update_enrollment_last_activity_at
   set_callback :html_render, :after, :add_csp_for_root
+  def relying_party
+    @relying_party ||=
+      WebAuthn::RelyingParty.new(
+        origin: "http://localhost:8080",
+        name: "WebAuthn Rails Demo App"
+      )
+  end
 
   class << self
     def instance_id

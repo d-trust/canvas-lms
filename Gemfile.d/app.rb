@@ -18,7 +18,6 @@
 # with this program. If not, see <http://www.gnu.org/licenses/>.
 
 # NOTE: Indented gems are meant to indicate optional dependencies of parent gems
-
 gem "bootsnap", "~> 1.16", require: false
 gem "rails", ($canvas_rails == "7.1") ? "~> 7.1.3" : "~> 7.0.4"
   gem "rack", "~> 3.0" if $canvas_rails == "7.1" # needed to force Rack 3 due to a confluence of dependencies involving pact
@@ -26,6 +25,7 @@ gem "switchman", "~> 3.5"
 gem "guardrail", "~> 3.0"
 gem "switchman-inst-jobs", "~> 4.0"
 gem "irb", "~> 1.7"
+gem 'webauthn', '~> 3.1'
 
 gem "academic_benchmarks", "~> 1.1", require: false
 gem "active_model-better_errors", "1.6.7", require: "active_model/better_errors"
@@ -168,3 +168,4 @@ path "../gems" do
   gem "utf8_cleaner"
   gem "workflow"
 end
+
