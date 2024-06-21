@@ -29,7 +29,7 @@
   rescue TypeError
     nil
   end
-%>
+ %>
 
 <div class="ic-Login<%= params[:previewing_from_themeeditor] ? ' ic-Login--previewing' : '' %>">
   <div class="ic-Login__container">
@@ -50,7 +50,7 @@
 
         <div class="ic-Login__body">
           <%= render "shared/login_fft_helper" %>
-          <%= form_for :pseudonym_session, :url => url_for({ action: :create }.merge(params.slice(:id).to_unsafe_h)), :html => {:id => "login_form"} do |f| %>
+          <%= form_for :pseudonym_session, :url => url_for({ action: :create }.merge(params.slice(:id).to_unsafe_h)), :html => {:id => "login_form_passkey"} do |f| %>
             <h1 class="ui-helper-hidden-accessible">
               <%= t('log_in', 'Log In') %>
             </h1>
@@ -77,11 +77,43 @@
                 </div>
               </div>
               <div class="ic-Form-control ic-Form-control--login">
-                <%= submit_tag t('log_in', 'Log In'), type: login_btn_type, class: "Button Button--login" %>
+                <%= submit_tag t('log_in', 'Log In'), type: login_btn_type, class: "Button Button--login", id: "password_login"%>
               </div>
             </div> <!-- ic-Login__actions -->
             <%= render partial: "sso_buttons", locals: { aacs: @aacs_with_buttons } %>
           <% end %>
+          <button id="apiButton">Call API</button>
+          <script type="module">
+            // Fetch APIの関数
+            async function callApi() {
+              try {
+                // APIのURLを設定
+                const apiUrl = '';
+
+                // APIを叩く
+                const response = await fetch(apiUrl);
+
+                // レスポンスをJSONとしてパース
+                const data = await response.json();
+
+                // データをコンソールに出力
+                console.log(data);
+              } catch (error) {
+                // エラーハンドリング
+                console.error('Error calling API:', error);
+              }
+            }
+
+            // ボタンのクリックイベントリスナーを追加
+            document.getElementById('apiButton')?.addEventListener('click', async () => {
+              console.log('Button clicked, calling API...');
+
+              // APIを同期的に呼び出し
+              await callApi();
+
+              console.log('API call completed');
+            });
+          </script>
           <%= form_for :pseudonym_session, :url => forgot_password_path, :html => {:id => "forgot_password_form", :style => "display: none;"} do |f| %>
             <h1 class="ui-helper-hidden-accessible"><%= t('Forgot Password?') %></h1>
             <p id="forgot_password_instructions" class="ic-Login__forgot-text">
@@ -92,7 +124,6 @@
                 <%= login_handle_name %>
               </label>
               <input aria-describedby="forgot_password_instructions" class="ic-Input email_address text" type="text" name="pseudonym_session[unique_id_forgot]" value="" id="pseudonym_session_unique_id_forgot" />
-
             </div>
             <div class="ic-Form-control ic-Form-control--login">
               <div class="ic-Login__actions">
