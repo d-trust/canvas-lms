@@ -25,6 +25,10 @@ Dir[Rails.root.join("{gems,vendor}/plugins/*/config/pre_routes.rb")].each do |pr
 end
 
 CanvasRails::Application.routes.draw do
+  namespace :login do
+    get 'passkey/index'
+    get 'passkey/create'
+  end
   post "/api/graphql", to: "graphql#execute"
   post "/api/graphql/subgraph", to: "graphql#subgraph_execute"
   # The subgraph endpoint is for use only with the federated API Gateway. See
@@ -830,6 +834,9 @@ CanvasRails::Application.routes.draw do
 
   get "login/canvas" => "login/canvas#new", :as => :canvas_login
   post "login/canvas" => "login/canvas#create"
+
+  get "login/registration_challenge" => "login/passkey#registration_challenge"
+  get "login/authentication_challenge" => "login/passkey#authentication_challenge"
 
   get "login/email_verify" => "login/email_verify#show", :as => :login_email_verify_show
   post "login/email_verify" => "login/email_verify#verify", :as => :login_email_verify
